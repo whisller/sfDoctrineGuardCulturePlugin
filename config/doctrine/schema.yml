@@ -1,0 +1,3 @@
+sfGuardUser:
+  columns:
+    culture: {type: string(7)}
