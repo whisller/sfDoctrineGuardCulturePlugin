@@ -17,9 +17,11 @@ class sfGuardCultureExtension
     public static function listenToUserCreated(sfEvent $event)
     {
         $sfGuardUser = $event->getSubject();
-        $user = sfContext::getInstance()->getUser();
+        if (sfContext::hasInstance()) {
+            $user = sfContext::getInstance()->getUser();
 
-        $sfGuardUser->setCulture($user->getCulture());
-        $sfGuardUser->save();
+            $sfGuardUser->setCulture($user->getCulture());
+            $sfGuardUser->save();
+        }
     }
 }
