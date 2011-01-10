@@ -1,3 +1,4 @@
 sfGuardUser:
   columns:
-    culture: {type: string(7)}
+    culture:
+      type: string(7)

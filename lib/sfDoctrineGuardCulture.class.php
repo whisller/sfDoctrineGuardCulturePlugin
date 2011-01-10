@@ -1,6 +1,6 @@
 <?php
 /**
- * Class with smal util methods for plugin
+ * Class with smal util methods for plugin.
  *
  * @package    sfDoctrineGuardCulturePlugin
  * @subpackage lib
@@ -9,7 +9,7 @@
 class sfDoctrineGuardCulture
 {
     /**
-     * Method return array with all available languages
+     * Return array with all available languages.
      *
      * E.g.
      * array('pl' => 'Polski',
@@ -32,7 +32,7 @@ class sfDoctrineGuardCulture
     }
 
     /**
-     * Return available cultures
+     * Return array with available cultures.
      *
      * E.g.
      * array(0 => 'pl',

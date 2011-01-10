@@ -1,6 +1,6 @@
 <?php
 /**
- * Class is adding routing for plugin
+ * Class is adding routing for plugin.
  *
  * @package    sfDoctrineGuardCulturePlugin
  * @subpackage lib.routing
@@ -11,7 +11,9 @@ class sfGuardCultureRouting
     /**
      * Listens to the routing.load_configuration event.
      *
-     * @param sfEvent An sfEvent instance
+     * @param  sfEvent An sfEvent instance
+     *
+     * @author Daniel Ancuta <whisller@gmail.com>
      */
     static public function listenToRoutingLoadConfigurationEvent(sfEvent $event)
     {

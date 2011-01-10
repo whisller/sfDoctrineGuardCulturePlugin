@@ -1,5 +1,8 @@
 all:
   sfDoctrineGuardCulturePlugin:
+    #
+    # Default available languages
+    #
     available_cultures:
       pl: Polski
       en: English

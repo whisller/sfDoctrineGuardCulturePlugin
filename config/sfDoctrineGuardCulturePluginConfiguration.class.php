@@ -9,7 +9,9 @@
 class sfDoctrineGuardCulturePluginConfiguration extends sfPluginConfiguration
 {
     /**
-     * @see sfPluginConfiguration
+     * @see    sfPluginConfiguration
+     *
+     * @author Daniel Ancuta <whisller@gmail.com>
      */
     public function initialize()
     {
