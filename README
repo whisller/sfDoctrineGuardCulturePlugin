@@ -79,7 +79,7 @@ If you want to save user culture to its sfGuardUser account you must have plugin
 
   * app_sfDoctrineGuardCulturePlugin_display_cultures_template (default 'Flags')
 
-        Default view for component DisplayLanguages
+        Default view (partial name) for component DisplayLanguages
 
   * app_sfDoctrineGuardCulturePlugin_DisplayLanguagesFlagsPath (default 'sfDoctrineGuardCulturePlugin/images/flags')
 
