@@ -51,13 +51,25 @@ If you want to save user culture to its sfGuardUser account you must have plugin
             settings:
               enabled_modules: [default, sfGuardCulture]
 
+  * Setup sfGuardUser.culture after object is created. In sfGuardUser.class.php
+
+        [php]
+        public function postInsert($event)
+        {
+            $dispatcher = ProjectConfiguration::getActive()->getEventDispatcher();
+
+            $dispatcher->notify(new sfEvent($event->getInvoker(), 'sf_guard_user.post_insert'));
+
+            parent::preInsert($event);
+        }
+
   * Clear you cache
 
         symfony cc
 
 ## Customization ##
 
-  * app_sfDoctrineGuardCulturePlugin_update_user (default true)
+  * app_sfDoctrineGuardCulturePlugin_change_culture_update_user (default true)
 
         If config is setup to true then after change culture by user its sfGuardUser.culture also will be update.
 

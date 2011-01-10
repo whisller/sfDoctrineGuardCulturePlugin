@@ -25,7 +25,7 @@ class ChangeCultureAction extends sfAction
 
         $user->setCulture($culture);
 
-        if ($user->isAuthenticated() && sfConfig::get('app_sfDoctrineGuardCulturePlugin_update_user', true)) {
+        if ($user->isAuthenticated() && sfConfig::get('app_sfDoctrineGuardCulturePlugin_change_culture_update_user', true)) {
             $sfGuardUser = $user->getGuardUser();
 
             if ($sfGuardUser instanceof sfGuardUser) {
