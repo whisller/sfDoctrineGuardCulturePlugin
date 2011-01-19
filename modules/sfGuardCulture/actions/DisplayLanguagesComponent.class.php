@@ -9,7 +9,8 @@
 class DisplayLanguagesComponent extends sfComponent
 {
     /**
-     * @param sfWebRequest $request
+     * @param  sfWebRequest $request
+     * @author Daniel Ancuta <whisller@gmail.com>
      */
     public function execute($request)
     {

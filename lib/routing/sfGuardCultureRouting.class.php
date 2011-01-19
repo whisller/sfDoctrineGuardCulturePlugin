@@ -12,7 +12,6 @@ class sfGuardCultureRouting
      * Listens to the routing.load_configuration event.
      *
      * @param  sfEvent An sfEvent instance
-     *
      * @author Daniel Ancuta <whisller@gmail.com>
      */
     static public function listenToRoutingLoadConfigurationEvent(sfEvent $event)

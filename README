@@ -30,8 +30,7 @@ If you want to save user culture to its sfGuardUser account you must have plugin
         symfony doctrine:build-model
         symfony doctrine:build-sql
 
-  * Update you database tables by starting from scratch (it will delete all
-    the existing tables, then re-create them):
+  * Update you database tables by starting from scratch (it will delete all the existing tables, then re-create them):
 
         symfony doctrine:insert-sql
 

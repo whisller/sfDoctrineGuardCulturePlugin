@@ -12,7 +12,6 @@ class sfGuardCultureExtension
      * Method is executed when user is created.
      *
      * @param  sfEvent $event
-     *
      * @author Daniel Ancuta <whisller@gmail.com>
      */
     public static function listenToUserCreated(sfEvent $event)
