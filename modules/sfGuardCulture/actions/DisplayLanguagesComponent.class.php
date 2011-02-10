@@ -19,7 +19,10 @@ class DisplayLanguagesComponent extends sfComponent
         if ($template = sfConfig::get('app_sfDoctrineGuardCulturePlugin_display_cultures_template', 'Flags')) {
             $this->getContext()->getConfiguration()->loadHelpers('Partial');
 
-            return include_partial('sfGuardCulture/DisplayLanguages'.$template, array('languages' => $languages));
+            $actualLanguage = isset($languages[$this->getUser()->getCulture()]) ? $languages[$this->getUser()->getCulture()] : null;
+
+            return include_partial('sfGuardCulture/DisplayLanguages'.$template, array('languages'      => $languages,
+                                                                                      'actualLanguage' => $actualLanguage));
 
             return sfView::NONE;
         }
