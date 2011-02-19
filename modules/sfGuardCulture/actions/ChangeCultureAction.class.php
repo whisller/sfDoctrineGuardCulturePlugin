@@ -37,7 +37,17 @@ class ChangeCultureAction extends sfAction
             }
          }
 
-         $changeCultureUrl = sfConfig::get('app_sfDoctrineGuardCulturePlugin_success_change_culture_url', $user->getReferer($request->getReferer()));
+         $changeCultureUrl = sfConfig::get('app_sfDoctrineGuardCulturePlugin_success_change_culture_url', $request->getReferer());
+
+         $sfPatternRouting = sfContext::getInstance()->getRouting();
+
+         if ($route = $sfPatternRouting->findRoute(preg_replace('@'.preg_quote($request->getUriPrefix().$request->getPathInfoPrefix()).'@i', '', $changeCultureUrl))) {
+             if (isset($route['parameters']['sf_culture'])) {
+                 $route['parameters']['sf_culture'] = $culture;
+             }
+
+             return $this->redirect($sfPatternRouting->generate($route['name'], $route['parameters']));
+         }
 
          return $this->redirect('' != $changeCultureUrl ? $changeCultureUrl : '@homepage');
     }
