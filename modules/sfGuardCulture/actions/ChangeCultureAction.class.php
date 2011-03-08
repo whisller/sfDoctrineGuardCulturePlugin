@@ -22,11 +22,15 @@ class ChangeCultureAction extends sfAction
 
         $this->forward404If(false === in_array($culture, array_keys($availableLanguages)));
 
-        $user = $this->getUser();
+        $context          = $this->getContext();
+        $controller       = $context->getController();
+        $sfPatternRouting = $context->getRouting();
+        $request          = $context->getRequest();
+        $user             = $context->getUser();
 
         $user->setCulture($culture);
 
-        if ($user->isAuthenticated() && sfConfig::get('app_sfDoctrineGuardCulturePlugin_change_culture_update_user', true)) {
+        if ($user->isAuthenticated() && sfConfig::get('app_sfDoctrineGuardCulturePlugin_change_culture_update_user', false)) {
             $sfGuardUser = $user->getGuardUser();
 
             if ($sfGuardUser instanceof sfGuardUser) {
@@ -37,18 +41,27 @@ class ChangeCultureAction extends sfAction
             }
          }
 
-         $changeCultureUrl = sfConfig::get('app_sfDoctrineGuardCulturePlugin_success_change_culture_url', $request->getReferer());
+         $changeCultureUrl = $controller->genUrl(sfConfig::get('app_sfDoctrineGuardCulturePlugin_success_change_culture_url', $request->getReferer()));
 
-         $sfPatternRouting = sfContext::getInstance()->getRouting();
+         $availableCultures = sfDoctrineGuardCulture::getAvailableCultures();
+         $regexCultures     = implode('|', $availableCultures);
+         $host              = $request->getHost();
 
-         if ($route = $sfPatternRouting->findRoute(preg_replace('@'.preg_quote($request->getUriPrefix().$request->getPathInfoPrefix()).'@i', '', $changeCultureUrl))) {
-             if (isset($route['parameters']['sf_culture'])) {
-                 $route['parameters']['sf_culture'] = $culture;
+         if (preg_match('@^('.$regexCultures.')\.@i', $host)) {
+             // there is culture in domain
+
+             $this->redirect(preg_replace('@://('.$regexCultures.')\.@i', '://'.$culture.'.', $changeCultureUrl));
+         } else {
+             // there is no culture in domain, so we can suppose that it is in :sf_culture variable
+             if ($route = $sfPatternRouting->findRoute(preg_replace('@'.preg_quote($request->getUriPrefix()).'@i', '', $changeCultureUrl))) {
+                 if (isset($route['parameters']['sf_culture'])) {
+                     $route['parameters']['sf_culture'] = $culture;
+                 }
+
+                 return $this->redirect($sfPatternRouting->generate($route['name'], $route['parameters']));
              }
-
-             return $this->redirect($sfPatternRouting->generate($route['name'], $route['parameters']));
          }
 
-         return $this->redirect('' != $changeCultureUrl ? $changeCultureUrl : '@homepage');
+         return $this->redirect('@homepage');
     }
 }
