@@ -41,7 +41,7 @@ class ChangeCultureAction extends sfAction
             }
          }
 
-         $changeCultureUrl = $controller->genUrl(sfConfig::get('app_sfDoctrineGuardCulturePlugin_success_change_culture_url', $request->getReferer()));
+         $changeCultureUrl = $controller->genUrl(sfConfig::get('app_sfDoctrineGuardCulturePlugin_success_change_culture_url', $request->getReferer()), true);
 
          $availableCultures = sfDoctrineGuardCulture::getAvailableCultures();
          $regexCultures     = implode('|', $availableCultures);
